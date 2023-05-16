@@ -1,4 +1,4 @@
-let currentPage = 0
+let currentPage = 1
 
 document.addEventListener("DOMContentLoaded", (e) => {
     fetch(`http://localhost:3000/monsters?_limit=50&_page=${currentPage}`)
@@ -84,4 +84,8 @@ function back(e){
 }
 
 function forward(e){
+    document.getElementById("monster-container").innerHTML = ""
+    fetch(`http://localhost:3000/monsters?_limit=50&_page=${++currentPage}`)
+    .then((r) => r.json())
+    .then((monsters) => addMonsters(monsters))
 }
